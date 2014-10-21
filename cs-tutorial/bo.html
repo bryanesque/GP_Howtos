@@ -1,0 +1,474 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ཇི་ལྟར: ཁྱེད་ཀྱི་ཨན་སྒྲོའི་སྒང་དུ་ ChatSecure ཉེན་སྲུང་ཅན་གྱི་འཕྲིན་ཐུང་བེད་སྤྱོད་གཏོང་། </title>
+<meta name="description" content="Painless tutorial on how use ChatSecure secure instant messaging on Android.">
+<meta name="viewport" id="viewport" content="maximum-scale=1">
+<style>
+	* {	
+		font-weight: normal;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	a {
+		color: #000;
+	}
+	
+	a:hover {
+		color: black;
+		background: limegreen;
+	}
+
+	body, html {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	#window {
+		background: url('./img/phone.png') no-repeat center bottom;
+		overflow: hidden;
+		position: absolute;
+		top: 200px;
+		width: 400px;
+		height: 700px;
+		left: 70%;
+		margin: 0 0 0 -507px;
+		opacity: 0;
+		-webkit-transform: scale(0.8);
+		-moz-transform: scale(0.8);
+		-webkit-transition: all 0.3s ease-out;
+		-moz-transition: all 0.3s ease-out;
+	}
+	
+	#window.visible {
+		opacity: 1;
+		-webkit-transform: scale(1);
+		-moz-transform: scale(1);
+	}
+	
+	
+	#device1, #devicef1, #devicef2, #devicef3, #devicef4, #device2, #device3, #device4, #device5, #device6, #device7, #device8, #device9, #device10, #device11, #device12, #device13, #device14, #device15, #device16, #device17, #device18, #device19, #device20 {
+		width: 400px;
+		height: 700px;
+		position: absolute;
+		visibility: hidden;
+	}
+	
+	#device1 {
+		background: url('./img/phone1.png') no-repeat bottom;
+	}
+	#devicef1 {
+		background: url('./img/phonef1.png') no-repeat bottom;
+	}
+	#devicef2 {
+		background: url('./img/phonef2.png') no-repeat bottom;
+	}
+	#devicef3 {
+		background: url('./img/phonef3.png') no-repeat bottom;
+	}
+	#devicef4 {
+		background: url('./img/phonef4.png') no-repeat bottom;
+	}	
+	#device2 {
+		background: url('./img/phone2.png') no-repeat bottom;
+	}
+
+	#device3 {
+		background: url('./img/phone3.png') no-repeat bottom;
+	}
+
+	#device4 {
+		background: url('./img/phone4.png') no-repeat bottom;
+	}
+
+	#device5 {
+		background: url('./img/phone5.png') no-repeat bottom;
+	}
+
+	#device6 {
+		background: url('./img/phone6.png') no-repeat bottom;
+	}
+
+	#device7 {
+		background: url('./img/phone7.png') no-repeat bottom;
+	}
+
+	#device8 {
+		background: url('./img/phone8.png') no-repeat bottom;
+	}
+
+	#device9 {
+		background: url('./img/phone9.png') no-repeat bottom;
+	}
+
+	#device10 {
+		background: url('./img/phone10.png') no-repeat bottom;
+	}
+
+	#device11 {
+		background: url('./img/phone11.png') no-repeat bottom;
+	}
+
+	#device12 {
+		background: url('./img/phone12.png') no-repeat bottom;
+	}
+
+	#device13 {
+		background: url('./img/phone13.png') no-repeat bottom;
+	}
+
+	#device14 {
+		background: url('./img/phone14.png') no-repeat bottom;
+	}
+
+	#device15 {
+		background: url('./img/phone15.png') no-repeat bottom;
+	}
+
+	#device16 {
+		background: url('./img/phone16.png') no-repeat bottom;
+	}
+
+	#device17 {
+		background: url('./img/phone17.png') no-repeat bottom;
+	}
+
+	#device18 {
+		background: url('./img/phone18.png') no-repeat bottom;
+	}
+
+	#device19 {
+		background: url('./img/phone19.png') no-repeat bottom;
+	}
+
+	#device20 {
+		background: url('./img/phone20.png') no-repeat bottom;
+	}
+	
+	h1 {
+		font-family: "HelveticaNeue-Light", "Helvetica";
+		font-size: 24px;
+		margin: 20px 0 5px 0;
+		width: 800px;
+		position: absolute;
+		left: 50%;
+		top: 70px;
+		margin: 0 0 0 -400px;
+		text-align: center;
+	}
+	
+	h1 span {
+		font-family: "HelveticaNeue-Bold", "Helvetica Bold", "Helvetica";
+	}
+
+	h2 {
+		font-family: "HelveticaNeue-Light", "Helvetica";
+		font-size: 12px;
+		width: 600px;
+		position: absolute;
+		top: 120px;
+		left: 50%;
+		margin: 0 0 0 -300px;
+		color: rgb(120,120,120);
+		text-align: center;
+		opacity: 0;
+		-webkit-transition: all 0.3s ease-out;
+		-moz-transition: all 0.3s ease-out;
+	}
+	
+	h2.away {
+		top: 120px;
+		left: 50%;
+		opacity: 0;
+		-webkit-transition: none;
+		-moz-transition: none;
+	}
+	
+	h2.visible {
+		opacity: 2;
+		top: 140px;
+	}
+	
+	h2.hidden {
+		opacity: 0;
+		top: 260px;
+	}
+	
+	::-moz-selection {
+		color: black;
+		background: blue;
+	}
+	
+	::selection {
+		color: black;
+		background: blue;
+	}
+	
+</style>
+
+
+<script type="text/javascript">
+	
+	function reset() {
+		document.getElementById('window').removeAttribute("class");
+		document.getElementById('device20').setAttribute("style", "visibility:hidden");																																								
+		document.getElementById('device9').setAttribute("style", "visibility:hidden");
+		document.getElementById('devicef4').setAttribute("style", "visibility:hidden");
+		document.getElementById('step18').setAttribute("class", "away");
+	}
+	
+	function step0() {
+		document.getElementById('step0').setAttribute("class", "visible");
+	}
+	
+	function step1() {
+		reset();
+		document.getElementById('window').setAttribute("class", "visible");
+		document.getElementById('step0').setAttribute("class", "hidden");
+		document.getElementById('step1').setAttribute("class", "visible");
+		document.getElementById('cursor').setAttribute("class", "away");
+	}
+	
+	function stepf1() {
+		document.getElementById('step1').setAttribute("class", "hidden");
+		document.getElementById('stepf1').setAttribute("class", "visible");
+		document.getElementById('devicef1').setAttribute("style", "visibility:visible");
+	}
+	function stepf2() {
+		document.getElementById('stepf1').setAttribute("class", "hidden");
+		document.getElementById('stepf2').setAttribute("class", "visible");
+		document.getElementById('devicef1').setAttribute("style", "visibility:hidden");
+		document.getElementById('devicef2').setAttribute("style", "visibility:visible");
+	}		
+	function stepf3() {
+		document.getElementById('stepf2').setAttribute("class", "hidden");
+		document.getElementById('stepf3').setAttribute("class", "visible");
+		document.getElementById('devicef2').setAttribute("style", "visibility:hidden");
+		document.getElementById('devicef3').setAttribute("style", "visibility:visible");
+	}		
+	function stepf4() {
+		document.getElementById('stepf3').setAttribute("class", "hidden");
+		document.getElementById('stepf4').setAttribute("class", "visible");
+		document.getElementById('devicef3').setAttribute("style", "visibility:hidden");
+		document.getElementById('devicef4').setAttribute("style", "visibility:visible");
+	}		
+	
+	function step2() {
+		document.getElementById('step1').setAttribute("class", "hidden");
+		document.getElementById('stepf4').setAttribute("class", "hidden");
+		document.getElementById('step2').setAttribute("class", "visible");
+		document.getElementById('devicef4').setAttribute("style", "visibility:hidden");
+		document.getElementById('device1').setAttribute("style", "visibility:visible");
+	}
+	
+	function step3() {
+		document.getElementById('step2').setAttribute("class", "hidden");
+		document.getElementById('step3').setAttribute("class", "visible");
+		document.getElementById('device1').setAttribute("style", "visibility:hidden");
+		document.getElementById('device2').setAttribute("style", "visibility:visible");
+	}
+	
+	function step4() {
+		document.getElementById('step3').setAttribute("class", "hidden");
+		document.getElementById('stepf4').setAttribute("class", "hidden");
+		document.getElementById('step4').setAttribute("class", "visible");
+		document.getElementById('device2').setAttribute("style", "visibility:hidden");
+		document.getElementById('device3').setAttribute("style", "visibility:visible");
+	}
+	
+	function step5() {
+		document.getElementById('step4').setAttribute("class", "hidden");
+		document.getElementById('step5').setAttribute("class", "visible");
+		document.getElementById('device3').setAttribute("style", "visibility:hidden");
+		document.getElementById('device4').setAttribute("style", "visibility:visible");
+
+	}
+	function step6() {
+		document.getElementById('step5').setAttribute("class", "hidden");
+		document.getElementById('step6').setAttribute("class", "visible");
+		document.getElementById('device4').setAttribute("style", "visibility:hidden");
+		document.getElementById('device5').setAttribute("style", "visibility:visible");
+	}	
+	
+// 	function step6a() {
+// 		document.getElementById('step6').setAttribute("class", "hidden");
+// 		document.getElementById('step6a').setAttribute("class", "visible");
+// 		document.getElementById('device5').setAttribute("style", "visibility:hidden");
+// 		document.getElementById('device6').setAttribute("style", "visibility:visible");
+// 			setTimeout(step6b, 1200);
+// 	}	
+// 	
+// 	function step6b() {
+// 		document.getElementById('step6a').setAttribute("class", "hidden");
+// 		document.getElementById('step6b').setAttribute("class", "visible");
+// 		document.getElementById('device6').setAttribute("style", "visibility:hidden");
+// 		document.getElementById('device7').setAttribute("style", "visibility:visible");
+// 			setTimeout(step6c, 2000);
+// 	}	
+// 	
+// 	function step6c() {
+// 		document.getElementById('step6b').setAttribute("class", "hidden");
+// 		document.getElementById('step6c').setAttribute("class", "visible");
+// 		document.getElementById('device7').setAttribute("style", "visibility:hidden");
+// 		document.getElementById('device8').setAttribute("style", "visibility:visible");
+// 			setTimeout(step7, 2000);
+// 	}	
+	
+	function step7() {
+		document.getElementById('step6').setAttribute("class", "hidden");
+		document.getElementById('step7').setAttribute("class", "visible");
+		document.getElementById('device8').setAttribute("style", "visibility:hidden");
+		document.getElementById('device9').setAttribute("style", "visibility:visible");
+	}	
+	function step8() {
+		document.getElementById('step7').setAttribute("class", "hidden");
+		document.getElementById('step8').setAttribute("class", "visible");
+		document.getElementById('device9').setAttribute("style", "visibility:hidden");
+		document.getElementById('device10').setAttribute("style", "visibility:visible");
+	}		
+	function step9() {
+		document.getElementById('step8').setAttribute("class", "hidden");
+		document.getElementById('step9').setAttribute("class", "visible");
+		document.getElementById('device10').setAttribute("style", "visibility:hidden");
+		document.getElementById('device11').setAttribute("style", "visibility:visible");
+				setTimeout(step10, 5000);
+	}	
+	function step10() {
+		document.getElementById('step9').setAttribute("class", "hidden");
+		document.getElementById('step10').setAttribute("class", "visible");
+		document.getElementById('device11').setAttribute("style", "visibility:hidden");
+		document.getElementById('device12').setAttribute("style", "visibility:visible");
+	}
+	function step11() {
+		document.getElementById('step10').setAttribute("class", "hidden");
+		document.getElementById('step11').setAttribute("class", "visible");
+		document.getElementById('device12').setAttribute("style", "visibility:hidden");
+		document.getElementById('device13').setAttribute("style", "visibility:visible");
+	}
+	function step12() {
+		document.getElementById('step11').setAttribute("class", "hidden");
+		document.getElementById('step12').setAttribute("class", "visible");
+		document.getElementById('device13').setAttribute("style", "visibility:hidden");
+		document.getElementById('device14').setAttribute("style", "visibility:visible");
+	}
+	function step13() {
+		document.getElementById('step12').setAttribute("class", "hidden");
+		document.getElementById('step13').setAttribute("class", "visible");
+		document.getElementById('device14').setAttribute("style", "visibility:hidden");
+		document.getElementById('device15').setAttribute("style", "visibility:visible");
+				setTimeout(step14, 3000);
+	}
+	function step14() {
+		document.getElementById('step13').setAttribute("class", "hidden");
+		document.getElementById('step14').setAttribute("class", "visible");
+		document.getElementById('device15').setAttribute("style", "visibility:hidden");
+		document.getElementById('device16').setAttribute("style", "visibility:visible");
+				setTimeout(step15, 3000);
+	}
+	function step15() {
+		document.getElementById('step14').setAttribute("class", "hidden");
+		document.getElementById('step15').setAttribute("class", "visible");
+		document.getElementById('device16').setAttribute("style", "visibility:hidden");
+		document.getElementById('device17').setAttribute("style", "visibility:visible");
+	}
+	function step16() {
+		document.getElementById('step15').setAttribute("class", "hidden");
+		document.getElementById('step16').setAttribute("class", "visible");
+		document.getElementById('device17').setAttribute("style", "visibility:hidden");
+		document.getElementById('device18').setAttribute("style", "visibility:visible");
+	}
+	function step17() {
+		document.getElementById('step16').setAttribute("class", "hidden");
+		document.getElementById('step17').setAttribute("class", "visible");
+		document.getElementById('device18').setAttribute("style", "visibility:hidden");
+		document.getElementById('device19').setAttribute("style", "visibility:visible");
+	}
+	function step18() {
+		document.getElementById('step17').setAttribute("class", "hidden");
+		document.getElementById('step18').setAttribute("class", "visible");
+		document.getElementById('device19').setAttribute("style", "visibility:hidden");
+		document.getElementById('device20').setAttribute("style", "visibility:visible");
+	}
+</script>
+</head>
+<body onload="setTimeout(step0, 0);">
+
+<h1>ཁྱེད་ཀྱིས་ཉེན་སྲུང་ཡོད་པའི་སྒོ་ནས་ཨན་སྒྲོའི་སྟེང་དུ་གླེང་མོལ་བྱེད་འདོད་འདུག་གམ</h1>
+
+<h2 id="stepf4">པར་གཞི་ཨ་མའི་སྟེང་དུ་ཕྱིར་ལོག་ནས་ཁྱོད་ཀྱིས་ངེས་པར་དུ་Guardianསྒར་སྒྲིན་ལས་འཆར་ཀྱི་བཀོལ་སྤྱོད་མ་ལག་ལ་བལྟ་དགོས།  ནང་འཇུག་གི་ཆེད་དུ་<i>ChatSecure</i>སྟེང་ལ་བསྣུན། <a href="javascript:step4()"> འགྲིག་སོང་། </a>
+</h2>
+<h2 id="stepf3">ནང་འཛུལ་བྱོས: <i>https://guardianproject.info/repo/</i> (S སྣོན་རྒྱུ་དེ་མ་བརྗེད།)<br><a href="javascript:stepf4()">ཚར་སོང་། བཀོལ་སྤྱོད་མ་ལག་དག་གང་དུ་ཡོད་དམ</a>
+</h2>
+<h2 id="stepf2">བཀོལ་སྤྱོད་མ་ལག་སྒོ་ཕྱེས་ནས་ཐོ་གཞུང་གི་སྒང་ལ་ཉུལ། &gt; གསོག་ཉར་དོ་དམ་བྱོས། &gt; གསོག་ཉར་གསར་བ་ཞིག<a href="javascript:stepf3()"> ཡག་པོ་འདུག ངས་ཅི་ཞིག་ནང་འཇུག་བྱེད་དགོས་སམ།</a>
+</h2>
+<h2 id="stepf1">འདི་རུ་བཀོལ་སྤྱོད་མ་ལག་གི་ཉར་གསོག་གཞན་ཞིག་འདུག ནང་ལ་འཛུལ་ནས་<i>F-droid</i> དེ་ནང་འཇུག་བྱོས། <br>དྲ་བའི་བཤེར་ཆས་ཤིག་གི་ནང་ལ<i>https://f-droid.org/FDroid.apk</i>. <a href="javascript:stepf2()">ལེགས་འགྲུབ་བྱུང། རྗེས་མ་དེ་གང་རེད།</a> </h2>
+<h2 id="step18">ཁྱེད་རང་ཧ་ཅང་ལེགས།<a href="javascript:step1()">བསྐྱར་དུ་སྟོན།</a><br>གནས་ཚུལ་མང་ཙམ་ཤེས་འདོད་ཚེ། ང་ཚོའི་དྲ་ཚིགས་ལ་ཕེབས། : <a href="http://guardianproject.info" target="_blank">སྒར་སྒྲིན་ལས་འཆར། </a> ·</h2>
+<h2 id="step17">10. ཚན་བྱང་། <span style="BACKGROUND-COLOR: limegreen">ལྗང་ཁུར་གྱུར། </span>ང་ཚོ་བདེ་འཇགས་རེད། <a href="javascript:step18()"> ཁོང་ལ་ཉེན་སྲུང་ཅན་གྱི་འཕྲིན་ཐུང་ཅིག་བསྐུར། </a>
+</h2>
+<h2 id="step16">མེར་ཁུ་ལ་ལན་ངོ་མ་རག་འདུག <a href="javascript:step17()">   ཡག་པོ་རེད། དེས་ན། དེ་ཁོང་ཡིན་མིན་ཁག་ཐེག་བྱེད། </a>
+</h2>
+<h2 id="step15">རག་སོང་། ངས་བློས་འགེལ་ཐུབ་པའི་དྲ་ལམ་དུ་བརྟག་དཔྱད་བྱས་བ་ཡིན།  <i>Spotify</i>. <a href="javascript:step16()">གསང་བ་དེ་ཐོངས། </a>
+</h2>
+<h2 id="step14">ངས་དྲི་བ་ཞིག་ལ་བསམ་བློ་གཏོང་བཞིན་ཡོད། </h2>
+<h2 id="step13">ངས་མེར་ཁུ་ཡི་མཛུབ་རིས་མཐོང་ཐུབ་གི་འདུག ང་ཁོང་ལ་ཁྱེད་རང་གཅིག་པོས་ལན་ཧ་གོ་བའི་དྲི་བ་ཞིག་གཏོང་བཅུག </h2>
+<h2 id="step12">10.དེ་དངོས་གནས་མེར་ཁུ་རེད་དམ། ར་སྤྲོད་ཀྱི་གདམ་ཁ་དེ་ཕྱིར་ཐོན།<a href="javascript:step13()">གཏན་འཇགས་བཟོ་བའི་ཆེད་དུ་དེ་ལ་བསྣུན།</a>
+</h2>
+<h2 id="step11">9. ཁོང་ལ་ཉེན་སྲུང་ཅན་གྱི་འཕྲིན་ཐུང་ཞིག་བསྐུར།<a href="javascript:step12()">བསྐུར།  ཨོ། བེ </a>
+</h2>
+<h2 id="step10">8. ཚན་བྱང་། <span style="BACKGROUND-COLOR: yellow">སེར་པོར་གྱུར། </span>མར་ཁུ་ལ་ང་ཚོའི་འཕྲིན་ཐུང་རག་པ་མ་ཟད་དེ་ཉེན་སྲུང་ཅན་ཏུ་ཡང་བསྒྱུར་འདུག<a href="javascript:step11()">དེ་དོན་དངོས་སུ་མར་ཁུ་ཡིན་པ་ར་སྤྲོད་བྱེད།</a>
+</h2>
+<h2 id="step9">དཔེ་བསགས་སོང་། <span style="BACKGROUND-COLOR: lightcoral">དེ་དམར་པོ་རེད། </span>དེར་བརྟེན། ད་དུང་ཉེན་སྲུང་ཅན་ཆགས་མི་འདུག མར་ཁུ་ཡིས་ཉེན་སྲུང་ཅན་མ་བཟོས་བར་དུ་སྒུག </h2>
+<h2 id="step8">7. ང་ཚོ་ནང་ལ་འཛུལ་ཐུབ་སོང་།  དེར་ངའི་གྲོགས་པོ་ཚོའི་མིང་ཐོ་འདུག <a href="javascript:step9()">ཚང་མ་སྒྲིག་འགོད་བྱས་ཚར། </a>
+</h2>
+<h2 id="step7">6.  ཁྱེད་ཀྱི་ཐོ་མཛོད་ཀྱི་གནས་ཚུལ་ནང་འཇུག་བྱོས། <i> གྷོ་རྒལ་འཕྲིན་ཐུང་དང་ངོ་དེབ། DukGo, &amp; XMPP</i> བཅས་ཚང་མས་ལས་ཀ་བྱེད་ཀྱི་འདུག <a href="javascript:step8()">ཚང་མ་སྒྲིག་འགོད་བྱས་ཚར། </a>
+</h2>
+<!-- 
+<h2 id="step6c">ཉེན་སྲུང་དེ་ཕྱོགས་གཉིས་ལ་རག་ལས་ཡོད།  དེར་བརྟེན། ཁྱེད་ཀྱི་གྲོགས་པོ་རྣམས་བདེ་འཇགས་ཡིན་པ་ཁག་ཐེག་བྱོས། </h2>
+<h2 id="step6b">དེ་དངོས་གནས་བདེ་འཇགས་རེད་དམ། ང་ཚོས་དེ་ཕྱེས། </h2>
+<h2 id="step6a">དེ་ཡིས་ཁྱོད་ལ་ང་ཚོའི་ལས་འཆར་སྐོར་བཤད་གི་རེད། </h2>
+ -->
+<h2 id="step6"><a href="javascript:step7()">ད་ལྟ་ང་ཚོས་འགོ་འཚུགས་བཞིན་ཡོད། </a></h2>
+<h2 id="step5">5. ཁྱེད་ཀྱི་སྐད་ཡིག་དེ་གདེམས་ནས་འགོ་ཚུགས<a href="javascript:step6()">དབྱིན་ཡིག་འདེམས </a>
+</h2>
+<h2 id="step4">4. <i>ChatSecure</i>དེ་ཁ་ཕྱེས། <a href="javascript:step5()">དེ་ལེགས་འགྲུབ་བྱུང་འདུག </a>
+</h2>
+<h2 id="step3">3.ཆོག་མཆན་དག་བསྐྱར་ཞིབ་བྱོས། གལ་སྲིད་མོས་མཐུན་ཡོད་ཚེ་དེ་ཚོ་ངོས་ལེན་བྱོས།  <a href="javascript:step4()">དེ་འགྲིག་འདུག ངས་ཁྱོད་ལ་ཡིད་ཆེས་བྱེད། </a>
+</h2>
+<h2 id="step2"> 2.<i>ChatSecure</i>.འཚོལ། <a href="javascript:step3()">དེ་རག་སོང་། </a>
+</h2>
+<h2 id="step1">1.གྷོ་རྒལ་མཉེན་ཆས་ཕབ་ལེན་བང་མཛོད་<i>Play Store</i>ཀྱི་ཁ་ཕྱེས། <a href="javascript:step2()"> དེ་ལས་སླ་བོ་རེད། དེའི་རྗེས་མ་དེ་གང་ཡིན།</a><br><a href="javascript:stepf1()">དེ་བཀག་འདུག རོགས་རམ་དགོས་ཀྱི་འདུག </a>
+</h2>
+<h2 id="step0">རེད།<a href="javascript:step1()">དེ་ངས་ཇི་ལྟར་བྱེད་དགོས་སམ།</a>
+</h2>
+
+<div id="window">
+	<div id="device1"></div>
+	<div id="devicef1"></div>
+	<div id="devicef2"></div>
+	<div id="devicef3"></div>
+	<div id="devicef4"></div>
+	<div id="device2"></div>
+	<div id="device3"></div>
+	<div id="device4"></div>
+	<div id="device5"></div>
+	<div id="device6"></div>
+	<div id="device7"></div>
+	<div id="device8"></div>
+	<div id="device9"></div>
+	<div id="device10"></div>
+	<div id="device11"></div>
+	<div id="device12"></div>
+	<div id="device13"></div>
+	<div id="device14"></div>
+	<div id="device15"></div>
+	<div id="device16"></div>
+	<div id="device17"></div>
+	<div id="device18"></div>
+	<div id="device19"></div>
+	<div id="device20"></div>
+</div>
+
+</body>
+</html>
