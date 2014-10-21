@@ -1,0 +1,560 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Краткое руководство по использованию Orbot для обеспечения анонимности и обхода цензуры на вашем Android-устройстве</title>
+<meta name="description" content="Painless tutorial on how use Orbot and Orweb for mobile anonymity and security on Android.">
+<meta name="viewport" id="viewport" content="maximum-scale=1">
+<style>
+	* {	
+		font-weight: normal;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	a {
+		color: #000;
+	}
+	
+	a:hover {
+		color: black;
+		background: limegreen;
+	}
+
+	body, html {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	#window {
+		background: url('galaxy.png') no-repeat center bottom;
+		overflow: hidden;
+		position: absolute;
+		top: 200px;
+		width: 401px;
+		height: 601px;
+		left: 70%;
+		margin: 0 0 0 -507px;
+		opacity: 0;
+		-webkit-transform: scale(0.8);
+		-moz-transform: scale(0.8);
+		-webkit-transition: all 0.3s ease-out;
+		-moz-transition: all 0.3s ease-out;
+	}
+	
+	#window.visible {
+		opacity: 1;
+		-webkit-transform: scale(1);
+		-moz-transform: scale(1);
+	}
+	
+	#cursor {
+		background: url('cursor.png') no-repeat 0 0;
+		width: 84px;
+		height: 121px;
+		position: absolute;
+		bottom: -200px;
+		right: 0;
+		-webkit-transition: all 0.5s ease-out;
+		-moz-transition: all 0.5s ease-out;
+	}
+	
+	#cursor.away {
+		bottom: -200px;
+		right: 200px;
+		-webkit-transition: none;
+		-moz-transition: none;
+	}
+	
+	#cursor.moved {
+		bottom: -200px;
+		right: 200px;
+		-webkit-transition: all 0.5s ease-out;
+		-moz-transition: all 0.5s ease-out;
+	}
+	
+	#cursor.device {
+		top: 50%;
+	    left: 50%;
+    	margin-left:-5px;
+	    margin-top:-5px; 
+	}
+	
+	#cursor.device_clicked {
+		top: 50%;
+	    left: 50%;
+    	margin-left:-5px;
+	    margin-top:-10px; 
+		-webkit-transition: none;
+		-moz-transition: none;
+	}
+	
+	#cursor.device_released {
+		top: 50%;
+	    left: 50%;
+    	margin-left:-5px;
+	    margin-top:-5px; 
+		-webkit-transition: none;
+		-moz-transition: none;
+	}
+	
+	
+	#device1, #devicef1, #devicef2, #devicef3, #devicef4, #devicef5, #device2, #device3, #device4, #device5, #device6, #device7, #device7a, #device7b, #device7c, #device7d, #device7e, #device8, #device8a, #device8b, #device8c, #device9, #device10, #device11, #device11a, #device12, #device13, #device14, #device15, #device16, #device17, #device17a, #device18, #device19, #device20 {
+		width: 401px;
+		height: 601px;
+		position: absolute;
+		visibility: hidden;
+	}
+	
+	#device1 {
+		background: url('galaxy1.png') no-repeat bottom;
+	}
+	#devicef1 {
+		background: url('galaxyf1.png') no-repeat bottom;
+	}
+	#devicef2 {
+		background: url('galaxyf2.png') no-repeat bottom;
+	}
+	#devicef3 {
+		background: url('galaxyf3.png') no-repeat bottom;
+	}
+	#devicef4 {
+		background: url('galaxyf4.png') no-repeat bottom;
+	}	
+	#devicef5 {
+		background: url('galaxyf4.png') no-repeat bottom;
+	}	
+
+	#device2 {
+		background: url('galaxy2.png') no-repeat bottom;
+	}
+
+	#device3 {
+		background: url('galaxy3.png') no-repeat bottom;
+	}
+
+	#device4 {
+		background: url('galaxy4.png') no-repeat bottom;
+	}
+
+	#device5 {
+		background: url('galaxy5.png') no-repeat bottom;
+	}
+
+	#device6 {
+		background: url('galaxy6.png') no-repeat bottom;
+	}
+
+	#device7 {
+		background: url('galaxy7.png') no-repeat bottom;
+	}
+
+	#device8 {
+		background: url('galaxy8.png') no-repeat bottom;
+	}
+
+	#device9 {
+		background: url('galaxy9.png') no-repeat bottom;
+	}
+
+	#device10 {
+		background: url('galaxy10.png') no-repeat bottom;
+	}
+
+	#device11 {
+		background: url('galaxy11.png') no-repeat bottom;
+	}
+
+	#device12 {
+		background: url('galaxy12.png') no-repeat bottom;
+	}
+
+	#device13 {
+		background: url('galaxy13.png') no-repeat bottom;
+	}
+
+	#device14 {
+		background: url('galaxy14.png') no-repeat bottom;
+	}
+
+	#device15 {
+		background: url('galaxy15.png') no-repeat bottom;
+	}
+
+	#device16 {
+		background: url('galaxy16.png') no-repeat bottom;
+	}
+
+	#device17 {
+		background: url('galaxy17.png') no-repeat bottom;
+	}
+	
+	#device17a {
+		background: url('galaxy17a.png') no-repeat bottom;
+	}
+	
+	#device18 {
+		background: url('galaxy18.png') no-repeat bottom;
+	}
+
+	#device19 {
+		background: url('galaxy19.png') no-repeat bottom;
+	}
+
+	#device20 {
+		background: url('galaxy20.png') no-repeat bottom;
+	}
+
+	h1 {
+		font-family: "HelveticaNeue-Light", "Helvetica";
+		font-size: 30px;
+		margin: 20px 0 5px 0;
+		width: 800px;
+		position: absolute;
+		left: 50%;
+		top: 70px;
+		margin: 0 0 0 -400px;
+		text-align: center;
+	}
+	
+	h1 span {
+		font-family: "HelveticaNeue-Bold", "Helvetica Bold", "Helvetica";
+	}
+
+	h2 {
+		font-family: "HelveticaNeue-Light", "Helvetica";
+		font-size: 18px;
+		width: 600px;
+		position: absolute;
+		top: 120px;
+		left: 50%;
+		margin: 0 0 0 -300px;
+		color: rgb(120,120,120);
+		text-align: center;
+		opacity: 0;
+		-webkit-transition: all 0.3s ease-out;
+		-moz-transition: all 0.3s ease-out;
+	}
+	
+	h2.away {
+		top: 120px;
+		left: 50%;
+		opacity: 0;
+		-webkit-transition: none;
+		-moz-transition: none;
+	}
+	
+	h2.visible {
+		opacity: 2;
+		top: 140px;
+	}
+	
+	h2.hidden {
+		opacity: 0;
+		top: 260px;
+	}
+	
+	::-moz-selection {
+		color: black;
+		background: blue;
+	}
+	
+	::selection {
+		color: black;
+		background: yellow;
+	}
+	
+</style>
+<script type="text/javascript">
+	
+	function reset() {
+		document.getElementById('window').removeAttribute("class");
+		document.getElementById('device17a').setAttribute("style", "visibility:hidden");		
+		document.getElementById('device18').setAttribute("style", "visibility:hidden");																																								
+		document.getElementById('device9').setAttribute("style", "visibility:hidden");
+		document.getElementById('devicef5').setAttribute("style", "visibility:hidden");
+		document.getElementById('stepf5').setAttribute("class", "away");
+		document.getElementById('step11a').setAttribute("class", "away");
+		document.getElementById('step12').setAttribute("class", "away");
+	}
+	
+	function step0() {
+		document.getElementById('step0').setAttribute("class", "visible");
+	}
+	
+	function step1() {
+		reset();
+		document.getElementById('window').setAttribute("class", "visible");
+		document.getElementById('step0').setAttribute("class", "hidden");
+		document.getElementById('step1').setAttribute("class", "visible");
+		document.getElementById('cursor').setAttribute("class", "away");
+	}
+	
+	function stepf1() {
+		document.getElementById('step1').setAttribute("class", "hidden");
+		document.getElementById('stepf1').setAttribute("class", "visible");
+		document.getElementById('devicef1').setAttribute("style", "visibility:visible");
+	}
+	function stepf2() {
+		document.getElementById('stepf1').setAttribute("class", "hidden");
+		document.getElementById('stepf2').setAttribute("class", "visible");
+		document.getElementById('devicef1').setAttribute("style", "visibility:hidden");
+		document.getElementById('devicef2').setAttribute("style", "visibility:visible");
+	}		
+	function stepf3() {
+		document.getElementById('stepf2').setAttribute("class", "hidden");
+		document.getElementById('stepf3').setAttribute("class", "visible");
+		document.getElementById('devicef2').setAttribute("style", "visibility:hidden");
+		document.getElementById('devicef3').setAttribute("style", "visibility:visible");
+	}		
+	function stepf4() {
+		document.getElementById('stepf3').setAttribute("class", "hidden");
+		document.getElementById('stepf4').setAttribute("class", "visible");
+		document.getElementById('devicef3').setAttribute("style", "visibility:hidden");
+		document.getElementById('devicef4').setAttribute("style", "visibility:visible");
+	}		
+	function stepf5() {
+		document.getElementById('stepf4').setAttribute("class", "hidden");
+		document.getElementById('stepf5').setAttribute("class", "visible");
+		document.getElementById('devicef4').setAttribute("style", "visibility:hidden");
+		document.getElementById('devicef5').setAttribute("style", "visibility:visible");
+	}
+		
+	function step2() {
+		document.getElementById('step1').setAttribute("class", "hidden");
+		document.getElementById('stepf5').setAttribute("class", "hidden");
+		document.getElementById('step2').setAttribute("class", "visible");
+		document.getElementById('devicef5').setAttribute("style", "visibility:hidden");
+		document.getElementById('device1').setAttribute("style", "visibility:visible");
+	}
+	
+	function step3() {
+		document.getElementById('step2').setAttribute("class", "hidden");
+		document.getElementById('step3').setAttribute("class", "visible");
+		document.getElementById('device1').setAttribute("style", "visibility:hidden");
+		document.getElementById('device2').setAttribute("style", "visibility:visible");
+	}
+	
+	function step4() {
+		document.getElementById('step3').setAttribute("class", "hidden");
+		document.getElementById('step4').setAttribute("class", "visible");
+		document.getElementById('device2').setAttribute("style", "visibility:hidden");
+		document.getElementById('device3').setAttribute("style", "visibility:visible");
+	}
+	
+	function step5() {
+		document.getElementById('step4').setAttribute("class", "hidden");
+				document.getElementById('stepf5').setAttribute("class", "hidden");
+		document.getElementById('step5').setAttribute("class", "visible");
+				document.getElementById('devicef5').setAttribute("style", "visibility:hidden");
+		document.getElementById('device3').setAttribute("style", "visibility:hidden");
+		document.getElementById('device4').setAttribute("style", "visibility:visible");
+
+	}
+	
+	function step6() {
+		document.getElementById('step5').setAttribute("class", "hidden");
+		document.getElementById('step6').setAttribute("class", "visible");
+		document.getElementById('device4').setAttribute("style", "visibility:hidden");
+		document.getElementById('device5').setAttribute("style", "visibility:visible");
+	}
+	
+	function step7a() {
+		document.getElementById('step6').setAttribute("class", "hidden");
+		document.getElementById('step7a').setAttribute("class", "visible");
+		document.getElementById('device5').setAttribute("style", "visibility:hidden");
+		document.getElementById('device6').setAttribute("style", "visibility:visible");
+			setTimeout(step7b, 7500);
+	}	
+	
+	function step7b() {
+		document.getElementById('step7a').setAttribute("class", "hidden");
+		document.getElementById('step7b').setAttribute("class", "visible");
+		document.getElementById('device6').setAttribute("style", "visibility:hidden");
+		document.getElementById('device7').setAttribute("style", "visibility:visible");
+			setTimeout(step7c, 6500);
+	}	
+	
+	function step7c() {
+		document.getElementById('step7b').setAttribute("class", "hidden");
+		document.getElementById('step7c').setAttribute("class", "visible");
+		document.getElementById('device7').setAttribute("style", "visibility:hidden");
+		document.getElementById('device8').setAttribute("style", "visibility:visible");
+			setTimeout(step7d, 6500);
+	}	
+
+	function step7d() {
+		document.getElementById('step7c').setAttribute("class", "hidden");
+		document.getElementById('step7d').setAttribute("class", "visible");
+		document.getElementById('device8').setAttribute("style", "visibility:hidden");
+		document.getElementById('device9').setAttribute("style", "visibility:visible");
+			setTimeout(step7e, 7500);
+	}	
+	
+	function step7e() {
+		document.getElementById('step7d').setAttribute("class", "hidden");
+		document.getElementById('step7e').setAttribute("class", "visible");
+		document.getElementById('device9').setAttribute("style", "visibility:hidden");
+		document.getElementById('device10').setAttribute("style", "visibility:visible");
+			setTimeout(step8, 6500);
+	}	
+		
+	function step8() {
+		document.getElementById('step11a').setAttribute("class", "away");
+		document.getElementById('step7e').setAttribute("class", "hidden");
+		document.getElementById('step8').setAttribute("class", "visible");
+		document.getElementById('device17a').setAttribute("style", "visibility:hidden");
+		document.getElementById('device10').setAttribute("style", "visibility:hidden");
+		document.getElementById('device11').setAttribute("style", "visibility:visible");
+	}	
+	function step8a() {
+		document.getElementById('cursor').setAttribute("class", "away");
+		document.getElementById('cursor').setAttribute("class", "device");
+			setTimeout(step8b, 500);
+	}
+	function step8b() {
+		document.getElementById('cursor').setAttribute("class", "device_clicked");
+			setTimeout(step8c, 500);
+	}
+	function step8c() {
+		document.getElementById('cursor').setAttribute("class", "device_released");
+		document.getElementById('step8').setAttribute("class", "hidden");
+		document.getElementById('step8a').setAttribute("class", "visible");
+		document.getElementById('device11').setAttribute("style", "visibility:hidden");
+		document.getElementById('device12').setAttribute("style", "visibility:visible");
+			setTimeout(step8d, 3000);
+	}		
+	function step8d() {
+				document.getElementById('cursor').setAttribute("class", "moved");
+		document.getElementById('step8a').setAttribute("class", "hidden");
+		document.getElementById('step8b').setAttribute("class", "visible");
+		document.getElementById('device12').setAttribute("style", "visibility:hidden");
+		document.getElementById('device13').setAttribute("style", "visibility:visible");
+			setTimeout(step8e, 4000);
+	}	
+	function step8e() {
+		document.getElementById('step8b').setAttribute("class", "hidden");
+		document.getElementById('step8c').setAttribute("class", "visible");
+		document.getElementById('device13').setAttribute("style", "visibility:hidden");
+		document.getElementById('device14').setAttribute("style", "visibility:visible");
+			setTimeout(step9, 4000);
+	}
+	function step9() {
+		document.getElementById('step8c').setAttribute("class", "hidden");
+		document.getElementById('step9').setAttribute("class", "visible");
+		document.getElementById('device14').setAttribute("style", "visibility:hidden");
+		document.getElementById('device15').setAttribute("style", "visibility:visible");
+	}
+	function step10() {
+		document.getElementById('step9').setAttribute("class", "hidden");
+		document.getElementById('step10').setAttribute("class", "visible");
+		document.getElementById('device15').setAttribute("style", "visibility:hidden");
+		document.getElementById('device16').setAttribute("style", "visibility:visible");
+	}
+	function step11() {
+		document.getElementById('step10').setAttribute("class", "hidden");
+		document.getElementById('step11').setAttribute("class", "visible");
+		document.getElementById('device16').setAttribute("style", "visibility:hidden");
+		document.getElementById('device17').setAttribute("style", "visibility:visible");
+	}
+	
+	function step11a() {
+		document.getElementById('step11').setAttribute("class", "hidden");
+		document.getElementById('step11a').setAttribute("class", "visible");
+		document.getElementById('device17').setAttribute("style", "visibility:hidden");
+		document.getElementById('device17a').setAttribute("style", "visibility:visible");
+		
+	}	
+	function step12() {
+		document.getElementById('step11').setAttribute("class", "hidden");
+		document.getElementById('step12').setAttribute("class", "visible");
+		document.getElementById('device17').setAttribute("style", "visibility:hidden");
+		document.getElementById('device17a').setAttribute("style", "visibility:hidden");
+		document.getElementById('device18').setAttribute("style", "visibility:visible");
+	}
+</script>
+</head>
+<body onload="setTimeout(step0, 0);">
+
+
+<h1>Итак, вы хотите обходить цензуру, используя Android-устройство?</h1>
+
+<h2 id="stepf5">Тогда нажмите <i>Orweb</i>, чтобы установить необходимый веб-браузер.<br><a href="javascript:step5()">Понятно.</a>
+</h2>
+<h2 id="stepf4">Вернитесь на главный экран и вы увидите приложения Guardian Project. Нажмите на <i>Orbot</i>, чтобы установить его. <a href="javascript:stepf5()">Понятно.</a>
+</h2>
+<h2 id="stepf3">Введите: <i>https://guardianproject.info/repo/</i> (не забудьте s!)<br><a href="javascript:stepf4()">Готово. Где приложения?</a>
+</h2>
+<h2 id="stepf2">Запустите приложение и перейдите в Меню (Menu) &gt; Управление репозиториями (Manage Repos) &gt; Новый репозиторий (New Repository) <a href="javascript:stepf3()">Хорошо. Что мне ввести?</a>
+</h2>
+<h2 id="stepf1">Существует альтернативный магазин приложений. Установите <i>F-droid</i>. Для этого введите<br><i>https://f-droid.org/FDroid.apk</i> в адресную строку мобильного браузера. <a href="javascript:stepf2()">Готово. Что дальше?</a>
+</h2>
+<h2 id="step12">Вы отлично справились! Введите адрес любого веб-сайта, чтобы открыть его анонимно. <a href="javascript:step1()">Повторить?</a><br>. Для получения более подробной информации, посетите наш сайт: <a href="http://guardianproject.info" target="_blank">The Guardian Project</a> ·</h2>
+<h2 id="step11a">Ваши настройки неверны.  <a href="javascript:step8()">Перезапустите <i>Orbot</i> и попробуйте снова воспользоваться <i>Orweb v2</i>.</a>
+</h2>
+<h2 id="step11">11. Откроется сайт <i>check.torproject.org</i>, чтобы подтвердить, что вы используете Интернет анонимно.<br><a href="javascript:step12()">Я вижу сообщение <i>Успешная установка</i>.</a> / <a href="javascript:step11a()">Я не вижу сообщение <i>Успешная установка</i>.</a>
+</h2>
+<h2 id="step10">10. Нажмите на изображение глобуса, чтобы запустить установленный веб-браузер. <a href="javascript:step11()">Запуск <i>Orweb v2</i>!</a>
+</h2>
+<h2 id="step9">9. Давайте убедимся, что сейчас мы можем обходить цензуру. <a href="javascript:step10()">Хорошо, как?</a>
+</h2>
+<h2 id="step8c">
+<i>Orbot</i> становится<span style="BACKGROUND-COLOR: limegreen">зелёным</span>когда программа подключена к <i>Tor</i>.</h2>
+<h2 id="step8b">
+<i>Orbot</i> становится<span style="BACKGROUND-COLOR: yellow">жёлтым</span>когда устанавливается подключение...</h2>
+<h2 id="step8a">
+<i>Orbot</i> запускается<span style="BACKGROUND-COLOR: silver">серым</span>.</h2>
+<h2 id="step8">8. Сейчас нужно должго жать на кнопку питания, чтобы начать. <a href="javascript:step8a()">Жму!</a>
+</h2>
+<h2 id="step7e">Безопасность это улица с двусторонним движением. Убедитесь, что ваши друзья тоже следят за своей безопасностью.</h2>
+<h2 id="step7d">Вы также можете использовать клёвые приложения, которые имеют функцию прокси,<br>такие как <i>Twitter</i> и другие.</h2>
+<h2 id="step7c">Если у вас джейлбрэйкнутый / рутнутый телефон, то вы можете выбрать<br>перенаправление всего трафика приложений через <i>Tor</i>.</h2>
+<h2 id="step7b">Действительно ли это безопасно? Мы сломаем.</h2>
+<h2 id="step7a">Мы расскажем вам о нашем проекте и о луковой маршрутизации через <i>Tor</i>.</h2>
+<h2 id="step6">6. Выберите язык и начинайте. <a href="javascript:step7a()">Продолжим с английским.</a>
+</h2>
+<h2 id="step5">5. Запустите <i>Orbot</i>. <a href="javascript:step6()">Готово.</a>
+</h2>
+<h2 id="step4">4. Установите ещё одно наше приложение <i>Orweb</i>, чтобы анонимно посещать страницы в Интернете.<br><a href="javascript:step5()">Эй, посмотри, его советуют!</a>
+</h2>
+<h2 id="step3">3. Просмотрите условия. Затем, если хотите, примите их. <a href="javascript:step4()">Хорошо, я вам доверяю.</a>
+</h2>
+<h2 id="step2">2. Ищите <i>Orbot</i>. <a href="javascript:step3()">Понятно.</a>
+</h2>
+<h2 id="step1">1. Откройте Google Play Store. <a href="javascript:step2()">Легко. Что дальше?</a><br><a href="javascript:stepf1()">Сервис заблокирован. Помогите!</a>
+</h2>
+<h2 id="step0">Да! <a href="javascript:step1()">Как получить	 инструмент для свободного и анонимного пользования Интернетом?</a>
+</h2>
+
+<div id="window">
+	<div id="device1"></div>
+	<div id="devicef1"></div>
+	<div id="devicef2"></div>
+	<div id="devicef3"></div>
+	<div id="devicef4"></div>
+	<div id="devicef5"></div>
+	<div id="device2"></div>
+	<div id="device3"></div>
+	<div id="device4"></div>
+	<div id="device5"></div>
+	<div id="device6"></div>
+	<div id="device7"></div>
+	<div id="device8"></div>
+	<div id="device9"></div>
+	<div id="device10"></div>
+	<div id="device11"></div>
+	<div id="device12"></div>
+	<div id="device13"></div>	
+	<div id="device14"></div>
+	<div id="device15"></div>
+	<div id="device16"></div>
+	<div id="device17"></div>
+	<div id="device17a"></div>
+	<div id="device18"></div>
+	<div id="device19"></div>
+	<div id="device20"></div>
+	<div id="cursor"></div>
+</div>
+
+</body>
+</html>
